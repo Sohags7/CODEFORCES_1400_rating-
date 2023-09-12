@@ -1,0 +1,151 @@
+#include<bits/stdc++.h>
+#define ll  long long 
+#define ld  long double 
+#define ff first
+#define ss second
+#define pb push_back
+#define pf push_front
+#define vec vector
+#define min_heap priority_queue <ll, vector<ll>, greater<ll> >
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(),vine present(container, element)(container.find(element) != container.end())
+#define cpresent(container, element)(find(all(container), element) != container.end())
+#define gcd(a,b) __gcd(a,b)
+#define     max3(a,b,c)     max(a,max(b,c))
+#define     max4(a,b,c,d)   max(max3(a,b,c),d)
+#define     min3(a,b,c)     min(a,min(b,c))
+#define     min4(a,b,c,d)   min(a,min3(b,c,d))
+#define er cout<<-1<<endl;
+#define  fast ios_base::sync_with_stdio(false);cin.tie(NULL);
+#define  mod 1000000007     // 1e9+7
+#define pi 3.1415926536
+#define REP(i,a,b) for (int i = a; i <= b; i++)
+#define fset(n) __builtin_ffs(n)
+#define trailzerobit(n) __builtin_ctz(n)
+using namespace std;
+
+ll cost(string s)
+{
+ 
+ll sum=0;
+  for(int i=1;i<s.size();i++ )
+  {
+    sum+=(s[i-1]-48)*10+s[i]-48;
+
+  }
+  return sum;
+
+}
+
+
+void solve()
+{
+ll k;
+
+  ll n;
+  cin>>n>>k;
+  string s;
+  cin>>s;
+  if(count(all(s),'0')==n)
+  {
+    cout<<0<<endl;
+    return;
+
+  }
+  ll l=0;
+  ll r=n-1;
+  ll lop=0;
+  ll rop=0;
+
+  while(l<n)
+  {
+    if(s[l]=='1')
+    {
+      break;
+    }
+    l++;
+    
+
+
+  }
+  while(r>=0)
+  {
+    if(s[r]=='1'){break;}
+    r--;
+   
+
+
+  }
+  
+  
+
+
+  if(l==r)
+  {
+    if(n-r-1<=k)
+    {
+      cout<<1<<endl;
+return;
+
+    }
+    else if(l<=k)
+    {
+      cout<<10<<endl;
+
+    }
+    else 
+    {
+      cout<<cost(s)<<endl;
+
+    }
+   
+  }
+  else 
+  {
+    
+
+    if(n-r-1<=k)
+    {
+      swap(s[r],s[n-1]);
+
+      k-=n-r-1;
+      
+    }
+
+    if(l<=k)
+    {
+      swap(s[0],s[l]);
+
+    }
+    cout<<cost(s)<<endl;
+
+
+
+
+
+  }
+
+  
+
+ 
+}
+
+
+
+int main ()
+{
+  #ifndef ONLINE_JUDGE
+freopen ("input.txt","r", stdin);
+freopen ("output.txt","w", stdout);
+ 
+#endif
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL); 
+ 
+ 
+int t;cin>>t;for(ll i=1;i<=t;i++)
+solve();
+
+return 0;
+ 
+}
