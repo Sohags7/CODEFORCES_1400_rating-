@@ -1,0 +1,143 @@
+#include<bits/stdc++.h>
+#define ll  long long 
+#define ld  long double 
+#define ff first
+#define ss second
+#define pb push_back
+#define pf push_front
+#define vec vector
+#define min_heap priority_queue <ll, vector<ll>, greater<ll> >
+#define all(v) v.begin(),v.end()
+#define allr(v) v.rbegin(),vine present(container, element)(container.find(element) != container.end())
+#define cpresent(container, element)(find(all(container), element) != container.end())
+#define gcd(a,b) __gcd(a,b)
+#define     max3(a,b,c)     max(a,max(b,c))
+#define     max4(a,b,c,d)   max(max3(a,b,c),d)
+#define     min3(a,b,c)     min(a,min(b,c))
+#define     min4(a,b,c,d)   min(a,min3(b,c,d))
+#define er cout<<-1<<endl;
+#define  fast ios_base::sync_with_stdio(false);cin.tie(NULL);
+#define  mod 998244353     // 1e9+7
+#define pi 3.1415926536
+#define REP(i,a,b) for (int i = a; i <= b; i++)
+#define fset(n) __builtin_ffs(n)
+#define trailzerobit(n) __builtin_ctz(n)
+using namespace std;
+
+const int sz=1e6+15;
+  
+
+ll dx[] = {0, 0, +1, -1};
+ll dy[] = {+1, -1, 0, 0};
+
+vector< pair<ll,ll> >adj[sz+5];
+
+bool  visit[sz+5]={0};
+
+ll ans[sz]={0};
+
+void dfs(ll node,ll weight)
+{
+  visit[node]=true;
+
+  for(auto child: adj[node])
+  {
+    //dbg(child.first,child.second);
+
+    if(!visit[child.first])
+    dfs(child.first,weight+child.second);
+   ans[node]=weight;
+  }
+ 
+}
+
+bool  visit1[sz+5]={0};
+ll final_ans=0;
+
+
+void dfs1(ll node,ll weight)
+{
+  visit1[node]=true;
+
+  for(auto child: adj[node])
+  {
+    
+    if(!visit1[child.first])
+    dfs1(child.first,weight+child.second);
+  }
+  final_ans=max(final_ans,weight);
+ 
+}
+
+
+void solve(ll test)
+{
+  ll n;
+  cin>>n;
+
+
+  for(int i=0;i<=30000;i++)
+  {  
+  adj[i].clear();
+  visit[i]=0;
+  visit1[i]=0;
+  ans[i]=0;
+
+  }
+
+
+  for(int i=0;i<n-1;i++)
+  {  
+    ll x,y;ll p;
+    cin>>x>>y>>p;
+    adj[x].pb({y,p});
+    adj[y].pb({x,p});
+  }
+  dfs(0,0);
+
+  ll mx_node=0;
+  ll mx=0;
+
+for(int i=0;i<n;i++)
+{
+ if(mx<ans[i])
+  {
+  mx=ans[i];
+  mx_node=i;
+  } 
+}
+
+//dbg(mx_node);
+
+final_ans=0;
+dfs1(mx_node,0);
+cout<<"Case "<<test<<": "<<final_ans<<endl;
+
+
+
+
+
+}
+
+
+
+
+int main ()
+{
+
+  #ifndef ONLINE_JUDGE
+freopen ("input.txt","r", stdin);
+freopen ("output.txt","w", stdout);
+ #endif
+
+
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL); 
+
+ 
+int t;cin>>t;for(ll i=1;i<=t;i++)
+solve(i);
+
+return 0;
+ 
+}
