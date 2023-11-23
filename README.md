@@ -1,3 +1,3 @@
 # CODEFORCES_1400_rating
 </br> 
-for practice
+for practice 1400 rating
